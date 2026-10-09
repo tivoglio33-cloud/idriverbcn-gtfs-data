@@ -11,8 +11,18 @@
       { "dia": "findeFestivo", "desde": 50, "hasta": 59, "tipo": "linia" }
     ],
     "H6": [
-      { "dia": "laborable", "desde": 30, "hasta": 39, "tipo": "fabra" },
+      { "dia": "laborable", "desde": 30, "hasta": 49, "tipo": "fabra" },
       { "dia": "findeFestivo", "desde": 50, "hasta": 59, "tipo": "generic" }
+    ],
+    "V13": [
+      { "dia": "laborable", "desde": 31, "hasta": 39, "ca": "Reforç Kennedy", "es": "Refuerzo Kennedy", "caCorto": "Kenn.", "esCorto": "Kenn." }
+    ],
+    "V9": [
+      { "dia": "laborable", "desde": 31, "hasta": 36, "ca": "Reforç escoles", "es": "Refuerzo colegios", "caCorto": "Esc.", "esCorto": "Col." }
+    ],
+    "H4": [
+      { "dia": "laborable", "desde": 31, "hasta": 31, "ca": "Reforç escoles", "es": "Refuerzo colegios", "caCorto": "Esc.", "esCorto": "Col." },
+      { "dia": "laborable", "desde": 33, "hasta": 33, "ca": "Reforç escoles", "es": "Refuerzo colegios", "caCorto": "Esc.", "esCorto": "Col." }
     ]
   }
 }
