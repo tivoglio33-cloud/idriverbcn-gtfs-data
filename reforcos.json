@@ -20,6 +20,12 @@
     "V9": [
       { "dia": "laborable", "desde": 31, "hasta": 36, "ca": "Reforç escoles", "es": "Refuerzo colegios", "caCorto": "Esc.", "esCorto": "Col." }
     ],
+    "150": [
+      { "dia": "findeFestivo", "desde": 30, "hasta": 39, "tipo": "generic" }
+    ],
+    "111": [
+      { "dia": "findeFestivo", "desde": 30, "hasta": 39, "tipo": "generic" }
+    ],
     "H4": [
       { "dia": "laborable", "desde": 31, "hasta": 31, "ca": "Reforç escoles", "es": "Refuerzo colegios", "caCorto": "Esc.", "esCorto": "Col." },
       { "dia": "laborable", "desde": 33, "hasta": 33, "ca": "Reforç escoles", "es": "Refuerzo colegios", "caCorto": "Esc.", "esCorto": "Col." }
