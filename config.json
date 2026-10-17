@@ -1,0 +1,6 @@
+{
+  "_explicacion": "Ajustes que la app iDriverBCN (Android/iPhone) lee cada media hora, sin versión nueva. flotaReusoMs: cada cuánto, como mucho, cada móvil pide la flota a TMB (entre 3000 y 120000; 6000 = 6 segundos). flotaUrl: dirección de un intermediario propio que sirva la flota (vacío = directo a TMB). flotaPausada: true = ningún móvil pide la flota (emergencia).",
+  "flotaReusoMs": 6000,
+  "flotaUrl": "",
+  "flotaPausada": false
+}
