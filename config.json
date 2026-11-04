@@ -1,7 +1,8 @@
 {
-  "_explicacion": "Ajustes que la app iDriverBCN (Android/iPhone) lee cada media hora, sin versión nueva. flotaReusoMs: cada cuánto, como mucho, cada móvil pide la flota a TMB (entre 3000 y 120000; 6000 = 6 segundos). flotaUrl: dirección de un intermediario propio que sirva la flota (vacío = directo a TMB). flotaPausada: true = ningún móvil pide la flota (emergencia). distanciaSubirM: a cuántos metros de ti tiene que estar el bus de \"L'espero\" para preguntar \"¿Te subes?\" (entre 30 y 500; por defecto 150).",
+  "_explicacion": "Ajustes que la app iDriverBCN (Android/iPhone) lee cada media hora, sin versión nueva. flotaReusoMs: cada cuánto, como mucho, cada móvil pide la flota a TMB (entre 3000 y 120000; 6000 = 6 segundos). flotaUrl: dirección de un intermediario propio que sirva la flota (vacío = directo a TMB). flotaPausada: true = ningún móvil pide la flota (emergencia). distanciaSubirM: a cuántos metros de ti tiene que estar el bus de \"L'espero\" para preguntar \"¿Te subes?\" (entre 30 y 500; por defecto 150). ultimaVersion: la última versión publicada en Google Play; si la instalada es más vieja, al abrir la app sale el aviso \"Hay una versión nueva\". Ponerla solo cuando Google ya la haya aprobado.",
   "flotaReusoMs": 6000,
   "flotaUrl": "",
   "flotaPausada": false,
-  "distanciaSubirM": 400
+  "distanciaSubirM": 400,
+  "ultimaVersion": "1.0.11"
 }
