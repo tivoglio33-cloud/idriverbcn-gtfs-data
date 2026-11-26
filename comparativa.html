@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparativa Google Play</title>
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#fff,#0e1116);--ink:light-dark(#14171c,#e9edf2);--sub:light-dark(#5b6470,#9aa4b1);--line:light-dark(#e3e6ea,#262c35);--mia:#0a5cff}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.band{padding:clamp(20px,4vw,48px) max(5vw,16px);max-width:1100px;margin:0 auto}
+h1{font-size:clamp(26px,4vw,40px);line-height:1.1;margin:0 0 6px}
+.sub{color:var(--sub);font-size:14px;margin:0 0 24px}
+.fig{position:relative;height:340px;margin:8px 0 6px}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.ley{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;margin-bottom:28px}
+.ley span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-size:13px;color:var(--sub);font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.mia td{font-weight:700;color:var(--mia)}
+.up{color:#00a05a;font-size:13px}.down{color:#e6261f;font-size:13px}
+.nota{color:var(--sub);font-size:13px;margin-top:18px}
+</style></head><body>
+<div class="band">
+<h1>Apps para conductores en Google Play</h1>
+<p class="sub" id="fecha"></p>
+<div class="fig"><svg id="g"></svg></div>
+<div class="ley" id="ley"></div>
+<div class="scroll"><table><thead><tr><th>App</th><th>Descargas</th><th>Semana</th><th>Tramo en Play</th><th>Nota</th><th>Reseñas</th><th>Actualizada</th><th>Anuncios</th><th>Compras</th></tr></thead><tbody id="t"></tbody></table></div>
+<p class="nota">Datos sacados de la ficha pública de Google Play cada lunes. Las descargas son el número exacto que Play guarda (en la ficha solo se ve el tramo). Si una app tiene pocas valoraciones, Play no enseña ni la nota ni las reseñas.</p>
+</div>
+<script>{
+const D={"apps":[{"id":"com.tivoglio.busbcn","nombre":"iDriverBCN","mia":true},{"id":"com.jmr.recorridolineas","nombre":"DriverBusBcn (JMR)"},{"id":"com.tmbnav.app","nombre":"TMB Nav"},{"id":"com.busnav.busnav_pro","nombre":"BusNav Pro"},{"id":"com.mtorregrosadev.alvolant","nombre":"AlVolant"}],"historial":[{"fecha":"2026-11-26","apps":{"com.tivoglio.busbcn":{"descargas":295,"tramo":"100+","nota":5,"resenas":null,"actualizada":"22 nov 2026","anuncios":false,"compras":false},"com.jmr.recorridolineas":{"descargas":3980,"tramo":"1 mil+","nota":5,"resenas":null,"actualizada":"16 abr 2026","anuncios":true,"compras":true},"com.tmbnav.app":{"descargas":362,"tramo":"100+","nota":null,"resenas":null,"actualizada":"3 sept 2026","anuncios":false,"compras":true},"com.busnav.busnav_pro":{"descargas":100,"tramo":"100+","nota":null,"resenas":null,"actualizada":"23 nov 2026","anuncios":false,"compras":true},"com.mtorregrosadev.alvolant":{"descargas":89,"tramo":"50+","nota":null,"resenas":null,"actualizada":"12 nov 2026","anuncios":false,"compras":true}}}]};
+const COL=['#0a5cff','#e6261f','#00a05a','#ffb400','#8a3ffc'];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const H=D.historial, ult=H[H.length-1], ant=H.length>1?H[H.length-2]:null;
+document.getElementById('fecha').textContent='Actualizado el '+new Date(ult.fecha+'T12:00:00').toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'})+' · '+H.length+' semana'+(H.length>1?'s':'')+' de historial';
+const filas=D.apps.map((a,i)=>({a,c:COL[i%COL.length],v:ult.apps[a.id]||{},p:ant?ant.apps[a.id]:null})).sort((x,y)=>(y.v.descargas||0)-(x.v.descargas||0));
+document.getElementById('t').innerHTML=filas.map(({a,v,p})=>{const d=(v.descargas!=null&&p&&p.descargas!=null)?v.descargas-p.descargas:null;const dif=d==null?'':(d>0?'<span class="up">+'+d+'</span>':d<0?'<span class="down">'+d+'</span>':'=');return '<tr'+(a.mia?' class="mia"':'')+'><td>'+esc(a.nombre)+'</td><td class="n">'+(v.descargas!=null?v.descargas.toLocaleString('es-ES'):'–')+'</td><td class="n">'+dif+'</td><td>'+esc(v.tramo||'–')+'</td><td class="n">'+(v.nota!=null?v.nota.toLocaleString('es-ES',{minimumFractionDigits:1})+' ★':'–')+'</td><td class="n">'+(v.resenas!=null?v.resenas:'–')+'</td><td>'+esc(v.actualizada||'–')+'</td><td>'+(v.anuncios?'Sí':'No')+'</td><td>'+(v.compras?'Sí':'No')+'</td></tr>'}).join('');
+document.getElementById('ley').innerHTML=D.apps.map((a,i)=>'<span style="--c:'+COL[i%COL.length]+'">'+esc(a.nombre)+'</span>').join('');
+const s=document.getElementById('g');
+const draw=()=>{const W=s.clientWidth,Hh=s.clientHeight,pl=48,pr=12,pt=10,pb=28;
+let max=1;H.forEach(h=>D.apps.forEach(a=>{const v=h.apps[a.id];if(v&&v.descargas>max)max=v.descargas}));
+const paso=Math.pow(10,Math.floor(Math.log10(max)));const top=Math.ceil(max/paso)*paso;
+const x=i=>H.length<2?pl+(W-pl-pr)/2:pl+i*(W-pl-pr)/(H.length-1),y=v=>pt+(Hh-pt-pb)*(1-v/top);
+let g='';for(let k=0;k<=4;k++){const v=top*k/4,yy=y(v);g+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+yy+'" y2="'+yy+'" stroke="currentColor" stroke-opacity=".12"/><text x="'+(pl-6)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" fill="currentColor" fill-opacity=".6">'+Math.round(v).toLocaleString('es-ES')+'</text>'}
+const cada=Math.max(1,Math.ceil(H.length/(W<520?4:8)));H.forEach((h,i)=>{if(i%cada===0||i===H.length-1)g+='<text x="'+x(i)+'" y="'+(Hh-8)+'" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".6">'+h.fecha.slice(8,10)+'/'+h.fecha.slice(5,7)+'</text>'});
+D.apps.forEach((a,j)=>{const pts=H.map((h,i)=>h.apps[a.id]&&h.apps[a.id].descargas!=null?[x(i),y(h.apps[a.id].descargas)]:null).filter(Boolean);if(!pts.length)return;const c=COL[j%COL.length];g+='<polyline fill="none" stroke="'+c+'" stroke-width="'+(a.mia?3.5:2)+'" points="'+pts.map(p=>p.join(',')).join(' ')+'"/>'+pts.map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(a.mia?4:3)+'" fill="'+c+'"/>').join('')});
+s.innerHTML=g};
+const ro=new ResizeObserver(draw);ro.observe(s);
+}</script>
+</body></html>
